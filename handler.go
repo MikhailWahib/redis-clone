@@ -28,13 +28,13 @@ func set(args []Value) Value {
 	if len(args) != 2 {
 		return Value{typ: "error", str: "ERR wrong number of arguments for 'set' command"}
 	}
-	SETsMu.Lock()
-	defer SETsMu.Unlock()
 
 	key := args[0].bulk
 	value := args[1].bulk
 
+	SETsMu.Lock()
 	SETs[key] = value
+	SETsMu.Unlock()
 
 	return Value{typ: "string", str: "OK"}
 }
@@ -43,12 +43,13 @@ func get(args []Value) Value {
 	if len(args) != 1 {
 		return Value{typ: "error", str: "ERR wrong number of arguments for 'set' command"}
 	}
-	SETsMu.Lock()
-	defer SETsMu.Unlock()
 
 	key := args[0].bulk
 
+	SETsMu.Lock()
 	value, ok := SETs[key]
+	SETsMu.Unlock()
+
 	if !ok {
 		return Value{typ: "null"}
 	}
@@ -68,13 +69,13 @@ func hset(args []Value) Value {
 	key := args[1].bulk
 	value := args[2].bulk
 
-	HSETsMu.Lock()
-	defer HSETsMu.Unlock()
-
 	if _, ok := HSETs[hash]; !ok {
 		HSETs[hash] = map[string]string{}
 	}
+
+	HSETsMu.Lock()
 	HSETs[hash][key] = value
+	HSETsMu.Unlock()
 
 	return Value{typ: "string", str: "OK"}
 }
@@ -88,9 +89,9 @@ func hget(args []Value) Value {
 	key := args[1].bulk
 
 	HSETsMu.Lock()
-	defer HSETsMu.Unlock()
-
 	value, ok := HSETs[hash][key]
+	HSETsMu.Unlock()
+
 	if !ok {
 		return Value{typ: "null"}
 	}
@@ -106,9 +107,9 @@ func hgetall(args []Value) Value {
 	hash := args[0].bulk
 
 	HSETsMu.Lock()
-	defer HSETsMu.Unlock()
-
 	value, ok := HSETs[hash]
+	HSETsMu.Unlock()
+
 	if !ok {
 		return Value{typ: "null"}
 	}

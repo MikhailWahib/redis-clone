@@ -28,9 +28,8 @@ func NewAof(path string) (*Aof, error) {
 	go func() {
 		for {
 			aof.mu.Lock()
-			defer aof.mu.Unlock()
-
 			aof.file.Sync()
+			aof.mu.Unlock()
 
 			time.Sleep(time.Second)
 		}

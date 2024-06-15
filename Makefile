@@ -1,5 +1,5 @@
 build:
-	go build -o bin/main *.go
+	go build -o bin/run *.go
 
 run:
 	go run *.go

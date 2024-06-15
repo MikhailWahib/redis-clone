@@ -41,7 +41,7 @@ To install and run this project:
 
 3. Run the server:
    ```sh
-   ./bin/main
+   ./bin/run
    ```
 
 ## Usage
