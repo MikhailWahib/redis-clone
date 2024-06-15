@@ -1,6 +1,6 @@
 # Redis Clone
 
-This project is a simplified clone of Redis, supporting basic commands and using the Redis Serialization Protocol (RESP) for communication.
+This project is a simplified clone of Redis, supporting basic commands and using the Redis Serialization Protocol (RESP) for communication and Data persistence using Append Only File (AOF).
 
 \*\*This project is for educational purposes and not meant to be on production.\*\*
 
@@ -80,3 +80,4 @@ To install and run this project:
 - `main.go`: Entry point of the application.
 - `resp.go`: Contains RESP parsing logic.
 - `handler.go`: Contains the implementations of supported commands handlers.
+- `aof.go`: Contains the logic of AOF.
