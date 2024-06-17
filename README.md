@@ -18,6 +18,7 @@ This Redis clone supports the following commands:
 
 - `SET`
 - `GET`
+- `DEL`
 - `HSET`
 - `HGET`
 - `HGETALL`
@@ -61,6 +62,10 @@ To install and run this project:
 - **GET**: Get the value of a key.
   ```sh
   GET key
+  ```
+  **DEL**: Delete values with keys
+  ```sh
+  DEL key1 key2 ...
   ```
 - **HSET**: Set a field in a hash to a value.
   ```sh
