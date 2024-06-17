@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"fmt"
 	"io"
 	"os"
 	"sync"
@@ -71,6 +72,7 @@ func (aof *Aof) Read(fn func(value Value)) error {
 			if err == io.EOF {
 				break
 			}
+			fmt.Println("Error Reading AOF: ", err)
 			return err
 		}
 

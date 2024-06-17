@@ -70,7 +70,7 @@ func main() {
 		handler, ok := Handlers[command]
 		if !ok {
 			fmt.Println("Invalid command: ", command)
-			writer.Write(Value{typ: "string", str: ""})
+			writer.Write(Value{typ: "string", str: "-ERR unknown command '" + value.array[0].bulk + "'"})
 			continue
 		}
 
