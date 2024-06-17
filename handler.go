@@ -1,6 +1,7 @@
 package main
 
 import (
+	"strconv"
 	"sync"
 )
 
@@ -8,6 +9,7 @@ var Handlers = map[string]func([]Value) Value{
 	"PING":    ping,
 	"SET":     set,
 	"GET":     get,
+	"DEL":     del,
 	"HSET":    hset,
 	"HGET":    hget,
 	"HGETALL": hgetall,
@@ -41,7 +43,7 @@ func set(args []Value) Value {
 
 func get(args []Value) Value {
 	if len(args) != 1 {
-		return Value{typ: "error", str: "ERR wrong number of arguments for 'set' command"}
+		return Value{typ: "error", str: "ERR wrong number of arguments for 'get' command"}
 	}
 
 	key := args[0].bulk
@@ -55,6 +57,33 @@ func get(args []Value) Value {
 	}
 
 	return Value{typ: "bulk", bulk: value}
+}
+
+func del(args []Value) Value {
+	if len(args) < 1 {
+		return Value{typ: "error", str: "ERR wrong number of arguments for 'del' command"}
+	}
+
+	var keys []string
+
+	for _, arg := range args {
+		keys = append(keys, arg.bulk)
+	}
+
+	SETsMu.Lock()
+	n := 0
+	for _, key := range keys {
+		_, ok := SETs[key]
+		if !ok {
+			continue
+		}
+
+		delete(SETs, key)
+		n += 1
+	}
+	SETsMu.Unlock()
+
+	return Value{typ: "integer", str: strconv.Itoa(n)}
 }
 
 var HSETs = map[string]map[string]string{}

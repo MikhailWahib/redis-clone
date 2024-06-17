@@ -74,7 +74,7 @@ func main() {
 			continue
 		}
 
-		if command == "SET" || command == "HSET" {
+		if command == "SET" || command == "HSET" || command == "DEL" {
 			err := aof.Write(value)
 			if err != nil {
 				fmt.Println("Error writing to AOF: ", err)
