@@ -63,10 +63,6 @@ To install and run this project:
   ```sh
   GET key
   ```
-  **DEL**: Delete values with keys
-  ```sh
-  DEL key1 key2 ...
-  ```
 - **HSET**: Set a field in a hash to a value.
   ```sh
   HSET hash field value
@@ -78,6 +74,14 @@ To install and run this project:
 - **HGETALL**: Get all fields and values in a hash.
   ```sh
   HGETALL hash
+  ```
+- **DEL**: Delete values with keys
+  ```sh
+  DEL key [key...]
+  ```
+- **EXISTS**: Check if keys exist
+  ```sh
+  EXISTS key [key...]
   ```
 
 ## Project Structure
