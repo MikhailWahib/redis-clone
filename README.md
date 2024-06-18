@@ -18,10 +18,11 @@ This Redis clone supports the following commands:
 
 - `SET`
 - `GET`
-- `DEL`
 - `HSET`
 - `HGET`
 - `HGETALL`
+- `DEL`
+- `EXISTS`
 
 ## Installation
 
