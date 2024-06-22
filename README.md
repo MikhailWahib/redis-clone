@@ -43,7 +43,7 @@ To install and run this project:
 
 3. Run the server:
    ```sh
-   ./bin/run
+   make run
    ```
 
 ## Usage
