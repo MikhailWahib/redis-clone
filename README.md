@@ -54,6 +54,14 @@ To install and run this project:
    redis-cli -h 127.0.0.1 -p 6379
    ```
 
+## Testing
+
+To run the tests:
+
+```sh
+make test
+```
+
 ## Supported Commands
 
 - **SET**: Set a key to a string value.
