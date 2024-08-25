@@ -1,4 +1,3 @@
-// handler_test.go
 package main
 
 import (
@@ -35,7 +34,6 @@ func TestPing(t *testing.T) {
 }
 
 func TestSetAndGet(t *testing.T) {
-	// Clear the SETs map before testing
 	SETs = make(map[string]string)
 
 	setArgs := []Value{
@@ -55,7 +53,6 @@ func TestSetAndGet(t *testing.T) {
 		t.Errorf("GET: Expected %v, got %v", expected, getResult)
 	}
 
-	// Test GET with non-existent key
 	getArgs = []Value{{typ: "bulk", bulk: "nonexistent"}}
 	getResult = get(getArgs)
 	expected = Value{typ: "null"}
@@ -65,7 +62,6 @@ func TestSetAndGet(t *testing.T) {
 }
 
 func TestDel(t *testing.T) {
-	// Clear and populate the SETs map before testing
 	SETs = make(map[string]string)
 	SETs["key1"] = "value1"
 	SETs["key2"] = "value2"
@@ -81,7 +77,6 @@ func TestDel(t *testing.T) {
 		t.Errorf("Expected %v, got %v", expected, result)
 	}
 
-	// Verify keys were deleted
 	if _, exists := SETs["key1"]; exists {
 		t.Errorf("key1 should have been deleted")
 	}
@@ -91,7 +86,6 @@ func TestDel(t *testing.T) {
 }
 
 func TestExists(t *testing.T) {
-	// Clear and populate the SETs map before testing
 	SETs = make(map[string]string)
 	SETs["key1"] = "value1"
 	SETs["key2"] = "value2"
@@ -109,7 +103,6 @@ func TestExists(t *testing.T) {
 }
 
 func TestHSet(t *testing.T) {
-	// Clear the HSETs map before testing
 	HSETs = make(map[string]map[string]string)
 
 	tests := []struct {
@@ -146,14 +139,12 @@ func TestHSet(t *testing.T) {
 		})
 	}
 
-	// Verify the hash was updated correctly
 	if HSETs["myhash"]["field1"] != "newvalue1" {
 		t.Errorf("Expected myhash[field1] to be 'newvalue1', got '%s'", HSETs["myhash"]["field1"])
 	}
 }
 
 func TestHGet(t *testing.T) {
-	// Set up test data
 	HSETs = map[string]map[string]string{
 		"myhash": {
 			"field1": "value1",
@@ -203,7 +194,6 @@ func TestHGet(t *testing.T) {
 }
 
 func TestHGetAll(t *testing.T) {
-	// Set up test data
 	HSETs = map[string]map[string]string{
 		"myhash": {
 			"field1": "value1",
