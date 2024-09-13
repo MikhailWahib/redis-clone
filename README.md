@@ -38,13 +38,14 @@ To install and run this project:
 2. Build the project:
 
    ```sh
-   make build
+   go build ./...
    ```
 
 3. Run the server:
    ```sh
-   make run
+   ./redis-clone
    ```
+  
 
 ## Usage
 
@@ -59,7 +60,7 @@ To install and run this project:
 To run the tests:
 
 ```sh
-make test
+go test -v
 ```
 
 ## Supported Commands
